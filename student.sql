@@ -182,3 +182,26 @@ on p.department_code = s.department_code
 where p.professor_name = '가교수'
 group by c.course_code;
 
+-- Q11 '사학생'학생과 같은 과목을 수강신청한 학생 이름을 출력하세요.
+select s.student_name
+from course c join professor p
+on c.professor_code = p.professor_code
+join student s
+on p.department_code = s.department_code
+where c.course_name = (
+select c.course_name
+from course c join professor p
+on c.professor_code = p.professor_code
+join student s
+on p.department_code = s.department_code
+where s.student_name = '사학생'
+);
+
+
+-- Q12 '사학생'이 수강신청한 과목의 과목 이름과 시작일자를 출력하세요.
+select c.course_name,  c.start_date
+from course c join professor p
+on c.professor_code = p.professor_code
+join student s
+on p.department_code = s.department_code
+where s.student_name = '사학생';
